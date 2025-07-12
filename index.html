@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Brother!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .birthday-title {
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        .birthday-message {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .message-text {
+            font-size: 1.2rem;
+            color: #fff;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .photo-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 2s infinite;
+        }
+
+        .photo-caption {
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .celebration-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cake-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            margin: 10px;
+        }
+
+        .cake-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .wishes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .wish-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-align: center;
+            transition: transform 0.3s ease;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .wish-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+            z-index: 1000;
+        }
+
+        .confetti:nth-child(odd) {
+            background: #4ecdc4;
+        }
+
+        .confetti:nth-child(3n) {
+            background: #ffa500;
+        }
+
+        .confetti:nth-child(4n) {
+            background: #ff69b4;
+        }
+
+        .balloon {
+            position: fixed;
+            width: 60px;
+            height: 80px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 3s ease-in-out infinite;
+            z-index: 999;
+        }
+
+        .balloon1 {
+            background: #ff6b6b;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .balloon2 {
+            background: #4ecdc4;
+            top: 30%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .balloon3 {
+            background: #ffa500;
+            top: 40%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .birthday-title { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .photo-gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="balloon balloon1"></div>
+    <div class="balloon balloon2"></div>
+    <div class="balloon balloon3"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="birthday-title">🎉 Happy Birthday Dada 🎉</h1>
+            <p class="subtitle">Celebrating another amazing year of your life</p>
+        </div>
+
+        <div class="birthday-message">
+            <p class="message-text">
+                Dear Brother, on this special day, I want you to know how grateful I am to have you in my life. 
+                Your laughter, your support, and your incredible spirit make every day brighter. 
+                Here's to another year of adventures, memories, and brotherly moments! 
+                May all your dreams come true and may this year bring you endless joy and happiness! 🎂✨
+            </p>
+        </div>
+
+        <div class="photo-gallery">
+            <div class="photo-card">
+                <img src="assets/Dada1.jpg"
+
+        <div class="celebration-section">
+            <button class="cake-btn" onclick="celebrate()">🎂 Blow the Candles!</button>
+            <button class="cake-btn" onclick="showWishes()">💝 Birthday Wishes</button>
+            <button class="cake-btn" onclick="launchConfetti()">🎊 Celebrate!</button>
+        </div>
+
+        <div class="wishes-container" id="wishesContainer" style="display: none;">
+            <div class="wish-card">
+                <h3>🌟 May Your Dreams Come True</h3>
+                <p>Wishing you a year filled with happiness, success, and all the things that make you smile!</p>
+            </div>
+            <div class="wish-card">
+                <h3>🎯 Another Year of Greatness</h3>
+                <p>You've achieved so much already, and I know this year will bring even more amazing opportunities!</p>
+            </div>
+            <div class="wish-card">
+                <h3>❤️ Always Here for You</h3>
+                <p>No matter what life brings, remember that you have a brother who loves and supports you always!</p>
+            </div>
+            <div class="wish-card">
+                <h3>🚀 Adventure Awaits</h3>
+                <p>May this new year of your life be filled with exciting adventures and unforgettable moments!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let confettiActive = false;
+        let wishesVisible = false;
+
+        function celebrate() {
+            // Create celebration effect
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffa500', '#ff69b4', '#9b59b6'];
+            const body = document.body;
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const celebration = document.createElement('div');
+                    celebration.style.position = 'fixed';
+                    celebration.style.width = '20px';
+                    celebration.style.height = '20px';
+                    celebration.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    celebration.style.left = Math.random() * window.innerWidth + 'px';
+                    celebration.style.top = '-20px';
+                    celebration.style.borderRadius = '50%';
+                    celebration.style.zIndex = '1000';
+                    celebration.style.animation = 'confetti-fall 3s linear forwards';
+                    body.appendChild(celebration);
+                    
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+            
+            // Play birthday song effect
+            playBirthdayTune();
+        }
+
+        function showWishes() {
+            const wishesContainer = document.getElementById('wishesContainer');
+            wishesVisible = !wishesVisible;
+            
+            if (wishesVisible) {
+                wishesContainer.style.display = 'grid';
+                wishesContainer.style.animation = 'slideInUp 0.5s ease-out';
+            } else {
+                wishesContainer.style.display = 'none';
+            }
+        }
+
+        function launchConfetti() {
+            if (confettiActive) return;
+            
+            confettiActive = true;
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffa500', '#ff69b4', '#9b59b6', '#2ecc71'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 50);
+            }
+            
+            setTimeout(() => {
+                confettiActive = false;
+            }, 5000);
+        }
+
+        function playBirthdayTune() {
+            // Create audio context for birthday tune
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const notes = [
+                {freq: 261.63, duration: 0.5}, // C
+                {freq: 261.63, duration: 0.5}, // C
+                {freq: 293.66, duration: 1},   // D
+                {freq: 261.63, duration: 1},   // C
+                {freq: 349.23, duration: 1},   // F
+                {freq: 329.63, duration: 2}    // E
+            ];
+            
+            let currentTime = audioContext.currentTime;
+            
+            notes.forEach(note => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = note.freq;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.3, currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+                
+                oscillator.start(currentTime);
+                oscillator.stop(currentTime + note.duration);
+                
+                currentTime += note.duration;
+            });
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate photo cards on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease-out';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.photo-card').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Auto-launch some confetti after page load
+            setTimeout(() => {
+                launchConfetti();
+            }, 2000);
+        });
+
+        // Add click effects to photo cards
+        document.querySelectorAll('.photo-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
